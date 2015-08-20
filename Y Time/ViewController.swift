@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-class ViewController: UIViewController, UIWebViewDelegate, MWTimeTravelDelegate {
+class ViewController: UIViewController, UIWebViewDelegate, MWTimeTravelDelegate, UITextFieldDelegate {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var weeklyTimeLabel: UILabel!
     @IBOutlet weak var periodTimeLabel: UILabel!
@@ -57,6 +57,7 @@ class ViewController: UIViewController, UIWebViewDelegate, MWTimeTravelDelegate 
             self.loginScreen?.loginButton.addTarget(self, action: "submitLoginForm:", forControlEvents: .TouchUpInside)
             self.view.addSubview(self.loginScreen!)
             self.loginScreen?.usernameField.becomeFirstResponder()
+            self.loginScreen?.passwordField.delegate = self
         }
     }
     
@@ -65,6 +66,11 @@ class ViewController: UIViewController, UIWebViewDelegate, MWTimeTravelDelegate 
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "closeFolder:"))
         self.settingsView.frame = CGRectMake(0, self.view.frame.height, self.view.frame.width, self.view.frame.height/2.2)
         self.appDel.window?.addSubview(settingsView)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        submitLoginForm(UIButton())
+        return true
     }
     
     func submitLoginForm(sender: UIButton) {
@@ -206,7 +212,7 @@ class ViewController: UIViewController, UIWebViewDelegate, MWTimeTravelDelegate 
     }
     
     @IBAction func reloadData(sender: AnyObject) {
-        self.webView?.reload()
+        self.webView!.loadRequest(NSURLRequest(URL: NSURL(string: "https://hrms.byu.edu/psc/ps/EMPLOYEE/HRMS/c/Y_EMPLOYEE_SELF_SERVICE.Y_TL_TIME_ENTRY.GBL")!))
         self.timeTravelSlider.resetSlider()
     }
     

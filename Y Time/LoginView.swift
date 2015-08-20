@@ -67,6 +67,7 @@ class LoginView: UIView {
         self.passwordField.borderStyle = .RoundedRect
         self.passwordField.placeholder = "Password"
         self.passwordField.secureTextEntry = true
+        self.passwordField.returnKeyType = UIReturnKeyType.Done
         
         self.loginButton.constrainUsing(constraints: [
             .LeftToLeft : (of: self, multiplier: 1.0, offset: 100),
