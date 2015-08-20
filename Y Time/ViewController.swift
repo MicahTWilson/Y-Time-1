@@ -107,7 +107,7 @@ class ViewController: UIViewController, UIWebViewDelegate, MWTimeTravelDelegate 
     
     func loginSuccessful() {
         if currentUser == nil {
-            let user = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: self.context)
+            let user: AnyObject = NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: self.context)
             user.setValue(loginScreen!.usernameField.text!, forKey: "username")
             user.setValue(loginScreen!.passwordField.text!, forKey: "password")
 
@@ -193,6 +193,16 @@ class ViewController: UIViewController, UIWebViewDelegate, MWTimeTravelDelegate 
             
         }
         self.previousURL = webView.request?.URL?.path
+    }
+    
+    @IBAction func clockInPressed(sender: AnyObject) {
+        let clockInJS = "document.getElementById('win0divY_TL_WRK_Y_TL_CLOCK_IN$0').click()"
+        self.webView?.stringByEvaluatingJavaScriptFromString(clockInJS)
+    }
+    
+    @IBAction func clockOutPressed(sender: AnyObject) {
+        let clockOutJS = "document.getElementById('win0divY_TL_WRK_Y_TL_CLOCK_OUT$0').click()"
+        self.webView?.stringByEvaluatingJavaScriptFromString(clockOutJS)
     }
     
     @IBAction func reloadData(sender: AnyObject) {
