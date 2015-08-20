@@ -12,7 +12,7 @@ import UIKit
 class YTimeView: UIView {
     var clockedIn = false
     override func drawRect(rect: CGRect) {
-        let logRect = CGRectMake(95, 620, 15, 15)
+        let logRect = CGRectMake(95, self.frame.height - 48, 15, 15)
         let path = UIBezierPath(ovalInRect: logRect)
         if clockedIn {
             UIColor.greenColor().setFill()
